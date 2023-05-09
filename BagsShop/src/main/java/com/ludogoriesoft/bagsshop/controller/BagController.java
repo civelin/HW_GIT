@@ -55,12 +55,14 @@ public class BagController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Bag> updateBagById(@PathVariable Long id, @RequestBody Bag bag) {
-        try {
-            bagService.updateBagById(id, bag);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
+        Bag bag1 = bagService.updateBagById(id, bag);
+        if (bag1 == null) {
             return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok().build();
+
+
     }
 
 }

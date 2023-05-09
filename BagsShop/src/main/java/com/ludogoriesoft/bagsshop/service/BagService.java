@@ -45,7 +45,7 @@ public class BagService {
     }
 
 
-    public void updateBagById(Long id, Bag bag) {
+    public Bag updateBagById(Long id, Bag bag) {
         Optional<Bag> existingBag = bagRepo.findById(id);
 
         if (existingBag.isPresent()) {
@@ -54,8 +54,9 @@ public class BagService {
             existingBag.get().setPrice(bag.getPrice());
 
             bagRepo.save(existingBag.get());
+            return existingBag.get();
         } else {
-            throw new RuntimeException("Bag with id " + id + "was not found");
+            return null;
         }
     }
 
